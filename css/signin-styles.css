@@ -77,7 +77,6 @@ a { text-decoration: none; color: inherit; }
     transition: opacity 0.2s;
 }
 .back-link:hover { opacity: 0.8; }
-.back-link i { font-size: 0.8rem; }
 
 /* ============================================================
    Auth Wrapper
@@ -152,10 +151,11 @@ form { display: flex; flex-direction: column; gap: 16px; }
     left: 14px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 0.8rem;
     color: var(--text-muted);
     pointer-events: none;
     transition: color 0.2s;
+    display: flex;
+    align-items: center;
 }
 
 .input-wrap input {
@@ -163,7 +163,7 @@ form { display: flex; flex-direction: column; gap: 16px; }
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 11px 14px 11px 38px;
+    padding: 11px 14px 11px 40px;
     font-family: var(--font);
     font-size: 0.9rem;
     color: var(--text-primary);
@@ -178,7 +178,6 @@ form { display: flex; flex-direction: column; gap: 16px; }
     box-shadow: 0 0 0 3px rgba(0, 200, 150, 0.12);
 }
 
-.input-wrap input:focus + .input-icon,
 .input-wrap:focus-within .input-icon {
     color: var(--accent);
 }
