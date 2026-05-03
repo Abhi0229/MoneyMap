@@ -1,0 +1,39 @@
+# ============================================================
+#  MoneyMap — .gitignore
+# ============================================================
+
+# ── Environment variables — NEVER commit real secrets ────────
+.env
+.env.local
+.env.development
+.env.production
+
+# ── OS generated files ───────────────────────────────────────
+.DS_Store
+.DS_Store?
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# ── Editor / IDE ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.user
+*.swp
+*.swo
+*~
+
+# ── Node (if ever added) ─────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# ── Build output (if ever added) ─────────────────────────────
+dist/
+build/
+.cache/
+
+# ── Logs ─────────────────────────────────────────────────────
+*.log
+logs/
