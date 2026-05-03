@@ -3,72 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About MoneyMap</title>
-    <link rel="stylesheet" href="../css/about-styles.css"> <!-- Updated CSS path -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('a[href*="#"]').on('click', function(event) {
-                event.preventDefault();
-                $('html, body').animate({
-                    scrollTop: $($(this).attr('href')).offset().top
-                }, 500);
-            });
-        });
-    </script>
+    <meta name="description" content="About MoneyMap – Learn how our personal finance tracker helps you manage income, expenses, and savings.">
+    <title>About – MoneyMap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/about-styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <header>
-        <div class="navigation-bar">
-            <h1 class="logo">MoneyMap</h1>
+
+    <!-- Navigation -->
+    <header id="site-header">
+        <div class="nav-inner">
+            <a href="Main.html" class="logo">MoneyMap</a>
             <nav>
                 <ul>
-                    <li><a href="Main.html" class="nav-button">Home</a></li>
-                    <li><a href="about.html" class="nav-button active">About</a></li>
-                    <li><a href="contact.html" class="nav-button">Contact</a></li>
+                    <li><a href="Main.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="signin.html" class="nav-cta">Sign In</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="about-description">
-            <h2>What is FinanceTracker?</h2>
-            <p>FinanceTracker is a comprehensive personal finance management tool designed to empower users to take control of their financial well-being. In today's fast-paced world, managing finances can be overwhelming, but with FinanceTracker, you can simplify the process and make informed decisions about your spending habits.</p>
-            
-            <div class="feature-cards">
-                <div class="feature-card">
-                    <strong>Manual Income/Expense Input:</strong>
-                    <p>Users can easily log their income and expenses, enabling precise tracking of financial activity.</p>
-                </div>
-                <div class="feature-card">
-                    <strong>Categorization:</strong>
-                    <p>Organize your transactions into predefined or custom categories.</p>
-                </div>
-                <div class="feature-card">
-                    <strong>Budget Visualization:</strong>
-                    <p>Provides engaging visualizations of your spending and saving.</p>
-                </div>
-                <div class="feature-card">
-                    <strong>Expense Forecasting:</strong>
-                    <p>Anticipate future expenses based on past spending patterns.</p>
-                </div>
-                <div class="feature-card">
-                    <strong>Exportable Reports:</strong>
-                    <p>Generate detailed reports in PDF or CSV formats.</p>
-                </div>
+    <!-- Page Header -->
+    <section class="page-hero">
+        <div class="page-hero-inner">
+            <div class="hero-badge">About MoneyMap</div>
+            <h1>Built for people who want to <span class="text-accent">understand their money</span></h1>
+            <p>MoneyMap is a personal finance tracker designed to be simple, clear, and honest about your financial habits — no subscriptions, no algorithms, no noise.</p>
+        </div>
+    </section>
+
+    <!-- What is MoneyMap -->
+    <section class="about-section">
+        <div class="about-inner">
+            <div class="about-text-block">
+                <span class="section-label">What it is</span>
+                <h2>A tool that gives you the full picture</h2>
+                <p>In today's world, managing personal finances can feel overwhelming. MoneyMap simplifies the process by letting you log income and expenses, set category budgets, and visualize where your money actually goes — all in one clean interface.</p>
+                <p>Whether you're tracking monthly groceries or planning yearly savings, MoneyMap gives you the clarity to make better financial decisions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features-section">
+        <div class="features-inner">
+            <div class="section-header">
+                <h2>What MoneyMap can do</h2>
+                <p>Every feature is built around one goal — helping you understand your money.</p>
             </div>
 
-            <p>MoneyMap is designed with simplicity and effectiveness in mind, helping users of all financial backgrounds navigate their financial journey with confidence.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">₹</div>
+                    <h3>Income Tracking</h3>
+                    <p>Log your monthly income and keep it as your baseline. Every calculation starts from here.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Category Budgets</h3>
+                    <p>Set spending limits for Food, Bills, EMI, and Entertainment. Know your limits before you exceed them.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Visual Charts</h3>
+                    <p>Pie and bar charts update in real time as you add expenses. See your budget allocation at a glance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏦</div>
+                    <h3>Savings Forecast</h3>
+                    <p>See your estimated monthly and yearly savings automatically calculated from your income and expenses.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>PDF Reports</h3>
+                    <p>Export a full financial summary as a PDF — income, expenses, savings, and charts included.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Secure Login</h3>
+                    <p>Your account is protected with Firebase Authentication. Your data stays private to you.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 MoneyMap | Designed for simplicity and control over your finances</p>
+        <div class="footer-inner">
+            <span class="footer-logo">MoneyMap</span>
+            <p>© 2024 MoneyMap. Built for financial clarity.</p>
+            <nav class="footer-nav">
+                <a href="Main.html">Home</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </footer>
+
+    <script src="../Javasxript/auth-nav.js"></script>
 </body>
 </html>

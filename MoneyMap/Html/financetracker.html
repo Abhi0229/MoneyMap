@@ -3,68 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoneyMap Finance Tracker (INR)</title>
+    <meta name="description" content="MoneyMap Finance Tracker – Track income, budgets, and expenses in real time.">
+    <title>Finance Tracker – MoneyMap</title>
+    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/financetracker-styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Enhanced Personal Finance Tracker (INR)</h1>
-        
-        <div class="input-group">
-            <h2>Income</h2>
-            <input type="number" id="incomeInput" placeholder="Enter your monthly income (INR)">
-            <button onclick="setIncome()">Set Income</button>
+
+    <!-- Navigation -->
+    <header id="site-header">
+        <div class="nav-inner">
+            <a href="Main.html" class="logo">MoneyMap</a>
+            <nav>
+                <ul>
+                    <li><a href="Main.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="signin.html" class="nav-cta">Sign In</a></li>
+                </ul>
+            </nav>
         </div>
-        
-        <div class="input-group">
-            <h2>Budget</h2>
-            <input type="number" id="foodBudget" placeholder="Food Budget (INR)">
-            <input type="number" id="billsBudget" placeholder="Bills Budget (INR)">
-            <input type="number" id="emiBudget" placeholder="EMI Budget (INR)">
-            <input type="number" id="entertainmentBudget" placeholder="Entertainment Budget (INR)">
-            <button onclick="setBudget()">Set Budget</button>
-        </div>
-        
-        <div class="input-group">
-            <h2>Expenses</h2>
-            <input type="number" id="expenseAmount" placeholder="Expense Amount (INR)">
-            <select id="expenseCategory">
-                <option value="Food">Food</option>
-                <option value="Bills">Bills</option>
-                <option value="EMI">EMI</option>
-                <option value="Entertainment">Entertainment</option>
-            </select>
-            <button onclick="addExpense()">Add Expense</button>
-            <button id="removeExpenseButton" onclick="removeExpense()">Remove Expense</button>
-        </div>
-        
-        <div class="chart-container">
-            <div class="chart">
-                <h2>Budget Overview</h2>
-                <canvas id="budgetPieChart"></canvas>
+    </header>
+
+    <div class="tracker-wrapper">
+
+        <!-- Page Header -->
+        <div class="page-hd">
+            <div>
+                <h1>Finance Tracker</h1>
+                <p class="page-hd-sub">Set income, budgets, and track expenses in real time — <span>all in INR</span>.</p>
             </div>
-            <div class="chart">
-                <h2>Expenses Overview</h2>
-                <canvas id="expensesBarChart"></canvas>
-            </div>
-        </div>
-        
-        <div class="summary">
-            <h2>Financial Summary (INR)</h2>
-            <p>Total Income: ₹<span id="totalIncome">0</span></p>
-            <p>Total Budget: ₹<span id="totalBudget">0</span></p>
-            <p>Total Expenses: ₹<span id="totalExpenses">0</span></p>
-            <p>Monthly Savings: ₹<span id="monthlySavings">0</span></p>
-            <p>Yearly Savings: ₹<span id="yearlySavings">0</span></p>
-            <p>Budget Utilization: <span id="budgetUtilization">0</span>%</p>
+            <button onclick="generatePDF()" class="btn btn-secondary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export PDF
+            </button>
         </div>
 
-        <button onclick="generatePDF()">Generate PDF Report</button>
+        <!-- KPI Strip -->
+        <div class="kpi-strip">
+
+            <div class="kpi-card" style="--kpi-glow: linear-gradient(135deg, rgba(0,200,150,0.06) 0%, transparent 70%);">
+                <div class="kpi-icon" style="background: var(--accent-dim); color: var(--accent);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                </div>
+                <div class="kpi-body">
+                    <span class="label">Monthly Income</span>
+                    <span class="value-lg" id="kpi-income" data-raw-value="0">0.00</span>
+                </div>
+                <div class="kpi-accent-bar" style="background: var(--accent);"></div>
+            </div>
+
+            <div class="kpi-card" style="--kpi-glow: linear-gradient(135deg, rgba(239,68,68,0.06) 0%, transparent 70%);">
+                <div class="kpi-icon" style="background: var(--red-dim); color: var(--red);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </div>
+                <div class="kpi-body">
+                    <span class="label">Total Expenses</span>
+                    <span class="value-lg" id="kpi-expenses" data-raw-value="0">0.00</span>
+                </div>
+                <div class="kpi-accent-bar" style="background: var(--red);"></div>
+            </div>
+
+            <div class="kpi-card" style="--kpi-glow: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, transparent 70%);">
+                <div class="kpi-icon" style="background: var(--blue-dim); color: var(--blue);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+                </div>
+                <div class="kpi-body">
+                    <span class="label">Monthly Savings</span>
+                    <span class="value-lg" id="kpi-savings" data-raw-value="0">0.00</span>
+                </div>
+                <div class="kpi-accent-bar" style="background: var(--blue);"></div>
+            </div>
+
+            <div class="kpi-card" style="--kpi-glow: linear-gradient(135deg, rgba(245,158,11,0.06) 0%, transparent 70%);">
+                <div class="kpi-icon" style="background: var(--yellow-dim); color: var(--yellow);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <div class="kpi-body">
+                    <span class="label">Budget Health</span>
+                    <span class="value-lg" id="kpi-health">—</span>
+                </div>
+                <div class="kpi-accent-bar" style="background: var(--yellow);"></div>
+            </div>
+
+        </div>
+
+        <!-- Section Divider -->
+        <div class="section-divider"><h2>Data Entry</h2></div>
+
+        <!-- Main Two-Column Grid -->
+        <div class="main-grid">
+
+            <!-- Left: Input Panel -->
+            <div class="input-col">
+
+                <!-- Income -->
+                <div class="card">
+                    <h3 class="card-heading"><span class="ch-dot"></span>Income</h3>
+                    <div class="inline-row">
+                        <input type="number" id="incomeInput" class="field" placeholder="Monthly income (e.g. 50000)">
+                        <button onclick="setIncome()" class="btn btn-primary">Set</button>
+                    </div>
+                </div>
+
+                <!-- Category Budgets -->
+                <div class="card">
+                    <h3 class="card-heading"><span class="ch-dot"></span>Category Budgets</h3>
+                    <div class="budget-field-grid">
+                        <div class="field-group">
+                            <label class="label" for="foodBudget">Food</label>
+                            <input type="number" id="foodBudget" class="field" placeholder="e.g. 8000">
+                        </div>
+                        <div class="field-group">
+                            <label class="label" for="billsBudget">Bills</label>
+                            <input type="number" id="billsBudget" class="field" placeholder="e.g. 5000">
+                        </div>
+                        <div class="field-group">
+                            <label class="label" for="emiBudget">EMI</label>
+                            <input type="number" id="emiBudget" class="field" placeholder="e.g. 10000">
+                        </div>
+                        <div class="field-group">
+                            <label class="label" for="entertainmentBudget">Entertainment</label>
+                            <input type="number" id="entertainmentBudget" class="field" placeholder="e.g. 3000">
+                        </div>
+                    </div>
+                    <button onclick="setBudget()" class="btn btn-primary" style="width:100%; margin-top:18px;">Apply Budgets</button>
+                </div>
+
+                <!-- Add/Remove Expense -->
+                <div class="card">
+                    <h3 class="card-heading"><span class="ch-dot" style="background: var(--red);"></span>Add / Remove Expense</h3>
+                    <div class="expense-row">
+                        <div class="field-group" style="flex:1;">
+                            <label class="label" for="expenseAmount">Amount (Rs.)</label>
+                            <input type="number" id="expenseAmount" class="field" placeholder="e.g. 2500">
+                        </div>
+                        <div class="field-group" style="flex:1;">
+                            <label class="label" for="expenseCategory">Category</label>
+                            <select id="expenseCategory" class="field">
+                                <option value="Food">Food</option>
+                                <option value="Bills">Bills</option>
+                                <option value="EMI">EMI</option>
+                                <option value="Entertainment">Entertainment</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="expense-actions">
+                        <button onclick="addExpense()" class="btn btn-primary">Add Expense</button>
+                        <button onclick="removeExpense()" class="btn btn-danger">Remove</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right: Budget Health Panel -->
+            <div class="card progress-col">
+                <h3 class="card-heading"><span class="ch-dot" style="background: var(--yellow);"></span>Budget Health</h3>
+                <div id="budget-progress-list" class="progress-list">
+                    <div class="progress-empty">Set budgets and add expenses to see health.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Section Divider -->
+        <div class="section-divider"><h2>Analytics</h2></div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+            <div class="card chart-card">
+                <div class="chart-card-header">
+                    <h3 class="card-heading" style="margin-bottom:0; border:none; padding:0;">Budget Allocation</h3>
+                </div>
+                <div class="chart-wrap">
+                    <canvas id="budgetPieChart"></canvas>
+                    <div class="chart-empty" id="pie-empty">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3A3D48" stroke-width="1.5"><path d="M21.21 15.89A10 10 0 118 2.83"/><path d="M22 12A10 10 0 0012 2v10z"/></svg>
+                        <span>Set category budgets<br>to see allocation</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card chart-card">
+                <div class="chart-card-header">
+                    <h3 class="card-heading" style="margin-bottom:0; border:none; padding:0;">Expense Breakdown</h3>
+                </div>
+                <div class="chart-wrap">
+                    <canvas id="expensesBarChart"></canvas>
+                    <div class="chart-empty" id="bar-empty">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3A3D48" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+                        <span>Add expenses to see<br>category breakdown</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Divider -->
+        <div class="section-divider"><h2>Financial Summary</h2></div>
+
+        <!-- Summary Grid -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <span class="label">Total Income</span>
+                <span class="summary-value" id="totalIncome" data-raw-value="0">0.00</span>
+                <span class="summary-currency">INR / month</span>
+            </div>
+            <div class="summary-card">
+                <span class="label">Total Budget</span>
+                <span class="summary-value" id="totalBudget" data-raw-value="0">0.00</span>
+                <span class="summary-currency">INR allocated</span>
+            </div>
+            <div class="summary-card">
+                <span class="label">Total Expenses</span>
+                <span class="summary-value" id="totalExpenses" data-raw-value="0">0.00</span>
+                <span class="summary-currency">INR spent</span>
+            </div>
+            <div class="summary-card">
+                <span class="label">Budget Used</span>
+                <span class="summary-value"><span id="budgetUtilization">0.00</span>%</span>
+                <span class="summary-currency">of total budget</span>
+            </div>
+            <div class="summary-card accent-card">
+                <span class="label">Monthly Savings</span>
+                <span class="summary-value accent-val" id="monthlySavings" data-raw-value="0">0.00</span>
+                <span class="summary-currency">INR / month</span>
+            </div>
+            <div class="summary-card accent-card">
+                <span class="label">Yearly Savings</span>
+                <span class="summary-value accent-val" id="yearlySavings" data-raw-value="0">0.00</span>
+                <span class="summary-currency">INR / year (projected)</span>
+            </div>
+        </div>
+
     </div>
 
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <span class="footer-logo">MoneyMap</span>
+            <p>© 2024 MoneyMap. Built for financial clarity.</p>
+            <nav class="footer-nav">
+                <a href="Main.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="../Javasxript/auth-nav.js"></script>
     <script src="../Javasxript/financetracker.js"></script>
 </body>
 </html>

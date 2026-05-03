@@ -3,60 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoneyMap</title>
-    <link rel="stylesheet" href="../css/main-styles.css"> <!-- Updated CSS link -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <meta name="description" content="MoneyMap – Track income, expenses, and savings. A personal finance tracker built for clarity.">
+    <title>MoneyMap – Personal Finance Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/main-styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <header>
-        <div class="navigation-bar">
-            <h1 class="logo">MoneyMap</h1>
+
+    <!-- Navigation -->
+    <header id="site-header">
+        <div class="nav-inner">
+            <a href="Main.html" class="logo">MoneyMap</a>
             <nav>
                 <ul>
                     <li><a href="Main.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li> <!-- Link to the About page -->
-                    <li><a href="contact.html">Contact</a></li> <!-- Updated Contact link -->
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="signin.html" class="nav-cta">Sign In</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
-        <div class="hero-content">
-            <h2>MoneyMap</h2>
-            <h2>Manage Your Finances Effortlessly</h2>
-            <p>Track your income and expenses, forecast future spending, and gain insights into your financial habits.</p>
-            <div class="buttons">
-                <a href="signin.html" class="btn">Sign In</a>
-                <a href="signin.html" class="btn btn-alt">Sign Up</a>
+        <div class="hero-grid-bg"></div>
+        <div class="hero-inner">
+            <div class="hero-badge">Personal Finance Tracker — INR</div>
+            <h1>Track every rupee.<br><span class="text-accent">Stay in control.</span></h1>
+            <p class="hero-sub">Log income, set category budgets, track expenses, and visualize your financial habits — all in one place. No subscriptions.</p>
+            <div class="hero-actions">
+                <a href="signin.html" id="hero-get-started" class="btn btn-primary">Get Started →</a>
+                <a href="about.html" id="hero-learn-more" class="btn btn-ghost">Learn More</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-value">₹0</span>
+                    <span class="stat-label">Hidden fees</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-value">4</span>
+                    <span class="stat-label">Budget categories</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-value">PDF</span>
+                    <span class="stat-label">Export reports</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery">
-        <h2>Explore Our Features</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="../images/WhatsApp Image 2024-09-28 at 18.28.17.jpeg" alt="Track your income and expenses"> <!-- Updated image path -->
-                <p>Track your income and expenses.</p>
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="features-inner">
+            <div class="section-header">
+                <h2>Everything you need</h2>
+                <p>Built to give you a complete picture of where your money goes.</p>
             </div>
-            <div class="gallery-item">
-                <img src="../images/hi.jpeg" alt="Gain financial insights and analytics"> <!-- Updated image path -->
-                <p>Gain financial insights and analytics.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-img-wrap">
+                        <img src="../images/finance-dashboard.png" alt="Income and expense tracking dashboard">
+                    </div>
+                    <div class="feature-card-body">
+                        <span class="feature-tag">Core</span>
+                        <h3>Income & Expense Tracking</h3>
+                        <p>Log every transaction with precision. See exactly where your money is going in real time.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img-wrap">
+                        <img src="../images/hi.jpeg" alt="Financial insights and analytics">
+                    </div>
+                    <div class="feature-card-body">
+                        <span class="feature-tag">Analytics</span>
+                        <h3>Visual Insights</h3>
+                        <p>Interactive charts and analytics to understand your spending patterns at a glance.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img-wrap">
+                        <img src="../images/saving.jpg" alt="Savings and budget planning">
+                    </div>
+                    <div class="feature-card-body">
+                        <span class="feature-tag">Planning</span>
+                        <h3>Budget & Savings Goals</h3>
+                        <p>Set monthly budgets per category and forecast your yearly savings automatically.</p>
+                    </div>
+                </div>
             </div>
-            <div class="gallery-item">
-                <img src="../images/saving.jpg" alt="Set savings goals and manage budgets"> <!-- Updated image path -->
-                <p>Forecast future spending trends.</p>
-            </div>
+        </div>
+    </section>
+
+    <!-- CTA Strip -->
+    <section class="cta-strip">
+        <div class="cta-inner">
+            <h2>Ready to take control of your finances?</h2>
+            <a href="signin.html" id="cta-signup" class="btn btn-primary">Create Free Account</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 FinanceTracker | Designed for simplicity and control over your finances</p>
+        <div class="footer-inner">
+            <span class="footer-logo">MoneyMap</span>
+            <p>© 2024 MoneyMap. Built for financial clarity.</p>
+            <nav class="footer-nav">
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </footer>
+
+    <script src="../Javasxript/auth-nav.js"></script>
 </body>
 </html>
